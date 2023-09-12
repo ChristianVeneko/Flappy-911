@@ -17,12 +17,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !isDead)
         {
-            playerRb.velocity = Vector2.zero;
             playerRb.AddForce(Vector2.up * upForce);
+            playerRb.velocity = Vector2.zero;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isDead = true;
+        GameManager.Instance.GameOver();
     }
 }
