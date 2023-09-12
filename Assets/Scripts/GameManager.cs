@@ -11,9 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject gameOverText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Player player;
+    [SerializeField] private GameObject startText;
 
     public int score = 0;
-
+    public bool gameStarted = false;
     public bool isGameOver = false;
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
@@ -34,10 +35,20 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void StartGame()
+    {
+        gameStarted = true;
+        startText.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        if(gameStarted == false && Input.GetMouseButtonDown(0))
+        {
+            StartGame();
+            Debug.Log("We");
+        }
         if (player.isDead && Input.GetMouseButtonDown(0))
         {
             RestartGame();

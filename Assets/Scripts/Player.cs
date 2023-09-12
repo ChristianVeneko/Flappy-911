@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerRb.gravityScale = 0f;
     }
 
     // Update is called once per frame
@@ -17,9 +18,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !isDead)
         {
-            playerRb.AddForce(Vector2.up * upForce);
-            playerRb.velocity = Vector2.zero;
+            playerRb.gravityScale = 1.6f;
+            Flight();
         }
+    }
+
+    public void Flight()
+    {
+        playerRb.velocity = Vector2.zero;
+        playerRb.AddForce(Vector2.up * upForce);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
