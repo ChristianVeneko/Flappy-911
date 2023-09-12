@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float upForce = 400f;
     private Rigidbody2D playerRb;
+    public bool isDead;
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -14,10 +15,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isDead)
         {
             playerRb.velocity = Vector2.zero;
             playerRb.AddForce(Vector2.up * upForce);
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isDead = true;
     }
 }
